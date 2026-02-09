@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alwin Santhosh S - Resume</title>
-    <style>
+    <link rel="stylesheet" href="style.css" />
+    <!-- <style>
       * {
         margin: 0;
         padding: 0;
@@ -511,20 +512,21 @@
           gap: 10px;
         }
       }
-    </style>
+    </style> -->
   </head>
   <body>
     <div class="container">
-      <div class="download-btn-container">
+      <!-- <div class="download-btn-container">
         <button class="download-btn" onclick="window.print()">
           📄 Download as PDF
         </button>
-      </div>
+      </div> -->
 
       <div id="resume">
         <!-- Header Section -->
         <div class="resume-header">
           <h1 id="name"></h1>
+          <p id="position"></p>
           <div class="contact-info">
             <span>✉️ <span id="email"></span></span>
             <span>📱 <span id="phone"></span></span>
@@ -584,9 +586,14 @@
           </div>
         </div>
       </div>
+      <div class="download-btn-container">
+        <button class="download-btn" onclick="window.print()">
+          📄 Download as PDF
+        </button>
+      </div>
     </div>
-
-    <script>
+    <script src="script.js"></script>
+    <!-- <script>
       // Resume data
       const resumeData = {
         personal_information: {
@@ -897,6 +904,6 @@
 
         coursesDiv.appendChild(courseItem);
       });
-    </script>
+    </script> -->
   </body>
 </html>
