@@ -1,993 +1,1339 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alwin Santhosh S — MERN Full Stack Developer & SDET</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0a0a0f;
-      --bg2: #0f0f1a;
-      --bg3: #13131f;
-      --surface: #1a1a2e;
-      --border: rgba(99, 102, 241, 0.15);
-      --accent: #6366f1;
-      --accent2: #a78bfa;
-      --accent3: #34d399;
-      --text: #e2e8f0;
-      --text2: #94a3b8;
-      --text3: #64748b;
-      --mono: 'DM Mono', monospace;
-      --sans: 'DM Sans', sans-serif;
-      --display: 'Syne', sans-serif;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alwin Santhosh S — MERN Full Stack Developer & SDET</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0f;
+        --bg2: #0f0f1a;
+        --bg3: #13131f;
+        --surface: #1a1a2e;
+        --border: rgba(99, 102, 241, 0.15);
+        --accent: #6366f1;
+        --accent2: #a78bfa;
+        --accent3: #34d399;
+        --text: #e2e8f0;
+        --text2: #94a3b8;
+        --text3: #64748b;
+        --mono: "DM Mono", monospace;
+        --sans: "DM Sans", sans-serif;
+        --display: "Syne", sans-serif;
+      }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
 
-    /* NOISE OVERLAY */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0.4;
-    }
+      /* NOISE OVERLAY */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 1000;
+        opacity: 0.4;
+      }
 
-    /* GLOW ORBS */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.12;
-    }
-    .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; right: -200px; }
-    .orb-2 { width: 400px; height: 400px; background: var(--accent3); bottom: 10%; left: -100px; }
+      /* GLOW ORBS */
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.12;
+      }
+      .orb-1 {
+        width: 600px;
+        height: 600px;
+        background: var(--accent);
+        top: -200px;
+        right: -200px;
+      }
+      .orb-2 {
+        width: 400px;
+        height: 400px;
+        background: var(--accent3);
+        bottom: 10%;
+        left: -100px;
+      }
 
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.25rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(10, 10, 15, 0.8);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.25rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
 
-    .nav-logo {
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-    .nav-logo span { color: var(--accent); }
+      .nav-logo {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 1.1rem;
+        color: var(--text);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+      }
+      .nav-logo span {
+        color: var(--accent);
+      }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--text2);
-      text-decoration: none;
-      transition: color 0.2s;
-      letter-spacing: 0.05em;
-    }
-    .nav-links a:hover { color: var(--accent2); }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        color: var(--text2);
+        text-decoration: none;
+        transition: color 0.2s;
+        letter-spacing: 0.05em;
+      }
+      .nav-links a:hover {
+        color: var(--accent2);
+      }
 
-    /* SECTIONS */
-    section {
-      position: relative;
-      z-index: 1;
-    }
+      /* SECTIONS */
+      section {
+        position: relative;
+        z-index: 1;
+      }
 
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 7rem 2rem 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+      /* HERO */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 7rem 2rem 4rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
 
-    .hero-inner {
-      width: 100%;
-    }
+      .hero-inner {
+        width: 100%;
+      }
 
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent3);
-      background: rgba(52, 211, 153, 0.08);
-      border: 1px solid rgba(52, 211, 153, 0.2);
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
-      margin-bottom: 2rem;
-      letter-spacing: 0.08em;
-      animation: fadeUp 0.6s ease both;
-    }
-    .hero-tag::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--accent3);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--accent3);
+        background: rgba(52, 211, 153, 0.08);
+        border: 1px solid rgba(52, 211, 153, 0.2);
+        padding: 0.35rem 0.85rem;
+        border-radius: 100px;
+        margin-bottom: 2rem;
+        letter-spacing: 0.08em;
+        animation: fadeUp 0.6s ease both;
+      }
+      .hero-tag::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--accent3);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.8);
+        }
+      }
 
-    h1 {
-      font-family: var(--display);
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      margin-bottom: 1.5rem;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-    h1 .highlight {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+      h1 {
+        font-family: var(--display);
+        font-size: clamp(3rem, 8vw, 6.5rem);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        color: var(--text);
+        margin-bottom: 1.5rem;
+        animation: fadeUp 0.6s 0.1s ease both;
+      }
+      h1 .highlight {
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent2) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
 
-    .hero-desc {
-      font-size: 1.15rem;
-      color: var(--text2);
-      max-width: 560px;
-      margin-bottom: 2.5rem;
-      font-weight: 300;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
+      .hero-desc {
+        font-size: 1.15rem;
+        color: var(--text2);
+        max-width: 560px;
+        margin-bottom: 2.5rem;
+        font-weight: 300;
+        animation: fadeUp 0.6s 0.2s ease both;
+      }
 
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
+      .hero-ctas {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        animation: fadeUp 0.6s 0.3s ease both;
+      }
 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--accent);
-      color: #fff;
-      padding: 0.85rem 1.75rem;
-      border-radius: 8px;
-      font-family: var(--sans);
-      font-weight: 500;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: 1px solid transparent;
-    }
-    .btn-primary:hover {
-      background: var(--accent2);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
-    }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.85rem 1.75rem;
+        border-radius: 8px;
+        font-family: var(--sans);
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+      }
+      .btn-primary:hover {
+        background: var(--accent2);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+      }
 
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: transparent;
-      color: var(--text);
-      padding: 0.85rem 1.75rem;
-      border-radius: 8px;
-      font-family: var(--sans);
-      font-weight: 500;
-      font-size: 0.9rem;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      transition: all 0.2s;
-    }
-    .btn-outline:hover {
-      border-color: var(--accent);
-      color: var(--accent2);
-      transform: translateY(-2px);
-    }
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: transparent;
+        color: var(--text);
+        padding: 0.85rem 1.75rem;
+        border-radius: 8px;
+        font-family: var(--sans);
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border: 1px solid var(--border);
+        transition: all 0.2s;
+      }
+      .btn-outline:hover {
+        border-color: var(--accent);
+        color: var(--accent2);
+        transform: translateY(-2px);
+      }
 
-    .hero-stats {
-      display: flex;
-      gap: 3rem;
-      margin-top: 4rem;
-      padding-top: 3rem;
-      border-top: 1px solid var(--border);
-      animation: fadeUp 0.6s 0.4s ease both;
-      flex-wrap: wrap;
-    }
-    .stat-num {
-      font-family: var(--display);
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.04em;
-    }
-    .stat-num span { color: var(--accent); }
-    .stat-label {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text3);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-top: 0.2rem;
-    }
+      .hero-stats {
+        display: flex;
+        gap: 3rem;
+        margin-top: 4rem;
+        padding-top: 3rem;
+        border-top: 1px solid var(--border);
+        animation: fadeUp 0.6s 0.4s ease both;
+        flex-wrap: wrap;
+      }
+      .stat-num {
+        font-family: var(--display);
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: -0.04em;
+      }
+      .stat-num span {
+        color: var(--accent);
+      }
+      .stat-label {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--text3);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-top: 0.2rem;
+      }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    /* DIVIDER */
-    .section-divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 0 auto;
-    }
+      /* DIVIDER */
+      .section-divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--border),
+          transparent
+        );
+        margin: 0 auto;
+      }
 
-    /* ABOUT */
-    #about {
-      padding: 6rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+      /* ABOUT */
+      #about {
+        padding: 6rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
 
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
+      .section-label {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
 
-    h2 {
-      font-family: var(--display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 2rem;
-      line-height: 1.1;
-    }
+      h2 {
+        font-family: var(--display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text);
+        margin-bottom: 2rem;
+        line-height: 1.1;
+      }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+      }
 
-    .about-text p {
-      color: var(--text2);
-      font-size: 1rem;
-      margin-bottom: 1.2rem;
-      font-weight: 300;
-    }
+      .about-text p {
+        color: var(--text2);
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+        font-weight: 300;
+      }
 
-    .about-text p strong { color: var(--text); font-weight: 500; }
+      .about-text p strong {
+        color: var(--text);
+        font-weight: 500;
+      }
 
-    .info-list {
-      list-style: none;
-      margin-top: 2rem;
-    }
-    .info-list li {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      color: var(--text2);
-      padding: 0.6rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .info-list li:last-child { border-bottom: none; }
-    .info-list .key { color: var(--accent2); min-width: 80px; }
+      .info-list {
+        list-style: none;
+        margin-top: 2rem;
+      }
+      .info-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        color: var(--text2);
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .info-list li:last-child {
+        border-bottom: none;
+      }
+      .info-list .key {
+        color: var(--accent2);
+        min-width: 80px;
+      }
 
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      gap: 1rem;
-    }
+      /* SKILLS */
+      .skills-grid {
+        display: grid;
+        gap: 1rem;
+      }
 
-    .skill-group {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      transition: border-color 0.2s;
-    }
-    .skill-group:hover { border-color: var(--accent); }
+      .skill-group {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        transition: border-color 0.2s;
+      }
+      .skill-group:hover {
+        border-color: var(--accent);
+      }
 
-    .skill-group-title {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent3);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.85rem;
-    }
+      .skill-group-title {
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        color: var(--accent3);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.85rem;
+      }
 
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
 
-    .tag {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text2);
-      background: rgba(99, 102, 241, 0.07);
-      border: 1px solid rgba(99, 102, 241, 0.15);
-      padding: 0.3rem 0.7rem;
-      border-radius: 6px;
-      transition: all 0.2s;
-    }
-    .tag:hover {
-      color: var(--accent2);
-      border-color: var(--accent);
-      background: rgba(99, 102, 241, 0.12);
-    }
+      .tag {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--text2);
+        background: rgba(99, 102, 241, 0.07);
+        border: 1px solid rgba(99, 102, 241, 0.15);
+        padding: 0.3rem 0.7rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+      .tag:hover {
+        color: var(--accent2);
+        border-color: var(--accent);
+        background: rgba(99, 102, 241, 0.12);
+      }
 
-    /* PROJECTS */
-    #projects {
-      padding: 6rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+      /* PROJECTS */
+      #projects {
+        padding: 6rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
 
-    .project-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: all 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(99,102,241,0.04) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .project-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.12);
-    }
+      .project-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+      .project-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.04) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      .project-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(99, 102, 241, 0.12);
+      }
 
-    .project-badge {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.65rem;
-      border-radius: 100px;
-    }
-    .badge-fsd { background: rgba(99,102,241,0.12); color: var(--accent2); border: 1px solid rgba(99,102,241,0.2); }
-    .badge-qa { background: rgba(52,211,153,0.1); color: var(--accent3); border: 1px solid rgba(52,211,153,0.2); }
-    .badge-ai { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
-    .badge-wip { background: rgba(251,113,133,0.1); color: #fb7185; border: 1px solid rgba(251,113,133,0.2); }
+      .project-badge {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.65rem;
+        border-radius: 100px;
+      }
+      .badge-fsd {
+        background: rgba(99, 102, 241, 0.12);
+        color: var(--accent2);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+      }
+      .badge-qa {
+        background: rgba(52, 211, 153, 0.1);
+        color: var(--accent3);
+        border: 1px solid rgba(52, 211, 153, 0.2);
+      }
+      .badge-ai {
+        background: rgba(251, 191, 36, 0.1);
+        color: #fbbf24;
+        border: 1px solid rgba(251, 191, 36, 0.2);
+      }
+      .badge-wip {
+        background: rgba(251, 113, 133, 0.1);
+        color: #fb7185;
+        border: 1px solid rgba(251, 113, 133, 0.2);
+      }
 
-    .project-title {
-      font-family: var(--display);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
+      .project-title {
+        font-family: var(--display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: -0.02em;
+      }
 
-    .project-desc {
-      font-size: 0.88rem;
-      color: var(--text2);
-      line-height: 1.65;
-      font-weight: 300;
-      flex: 1;
-    }
+      .project-desc {
+        font-size: 0.88rem;
+        color: var(--text2);
+        line-height: 1.65;
+        font-weight: 300;
+        flex: 1;
+      }
 
-    .project-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-    .stack-tag {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--text3);
-      background: var(--bg3);
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-    }
+      .project-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .stack-tag {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        color: var(--text3);
+        background: var(--bg3);
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+      }
 
-    .project-links {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 0.5rem;
-    }
-    .project-links a {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text2);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      transition: color 0.2s;
-    }
-    .project-links a:hover { color: var(--accent2); }
+      .project-links {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+      .project-links a {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--text2);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        transition: color 0.2s;
+      }
+      .project-links a:hover {
+        color: var(--accent2);
+      }
 
-    /* ROADMAP */
-    #roadmap {
-      padding: 6rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+      /* ROADMAP */
+      #roadmap {
+        padding: 6rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
 
-    .roadmap-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-      margin-top: 3rem;
-    }
+      .roadmap-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 3rem;
+      }
 
-    .roadmap-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: all 0.2s;
-    }
-    .roadmap-card:hover { border-color: rgba(99,102,241,0.4); }
-    .roadmap-card.done { border-color: rgba(52,211,153,0.25); }
-    .roadmap-card.active {
-      border-color: rgba(99,102,241,0.5);
-      background: linear-gradient(135deg, rgba(99,102,241,0.05), var(--bg2));
-    }
+      .roadmap-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.2s;
+      }
+      .roadmap-card:hover {
+        border-color: rgba(99, 102, 241, 0.4);
+      }
+      .roadmap-card.done {
+        border-color: rgba(52, 211, 153, 0.25);
+      }
+      .roadmap-card.active {
+        border-color: rgba(99, 102, 241, 0.5);
+        background: linear-gradient(
+          135deg,
+          rgba(99, 102, 241, 0.05),
+          var(--bg2)
+        );
+      }
 
-    .roadmap-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
-    .roadmap-title {
-      font-family: var(--display);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-    }
-    .roadmap-desc {
-      font-size: 0.82rem;
-      color: var(--text2);
-      font-weight: 300;
-      line-height: 1.5;
-    }
-    .roadmap-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      margin-top: 1rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 100px;
-    }
-    .status-done { background: rgba(52,211,153,0.1); color: var(--accent3); }
-    .status-active { background: rgba(99,102,241,0.12); color: var(--accent2); }
-    .status-soon { background: rgba(100,116,139,0.15); color: var(--text3); }
+      .roadmap-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .roadmap-title {
+        font-family: var(--display);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+      }
+      .roadmap-desc {
+        font-size: 0.82rem;
+        color: var(--text2);
+        font-weight: 300;
+        line-height: 1.5;
+      }
+      .roadmap-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        margin-top: 1rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 100px;
+      }
+      .status-done {
+        background: rgba(52, 211, 153, 0.1);
+        color: var(--accent3);
+      }
+      .status-active {
+        background: rgba(99, 102, 241, 0.12);
+        color: var(--accent2);
+      }
+      .status-soon {
+        background: rgba(100, 116, 139, 0.15);
+        color: var(--text3);
+      }
 
-    /* CONTACT */
-    #contact {
-      padding: 6rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      text-align: center;
-    }
+      /* CONTACT */
+      #contact {
+        padding: 6rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: center;
+      }
 
-    .contact-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 4rem 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .contact-card::before {
-      content: '';
-      position: absolute;
-      top: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 400px; height: 200px;
-      background: radial-gradient(ellipse, rgba(99,102,241,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
+      .contact-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 4rem 3rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-card::before {
+        content: "";
+        position: absolute;
+        top: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 400px;
+        height: 200px;
+        background: radial-gradient(
+          ellipse,
+          rgba(99, 102, 241, 0.15) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
 
-    .contact-card h2 { margin-bottom: 0.75rem; }
-    .contact-card p { color: var(--text2); max-width: 480px; margin: 0 auto 2.5rem; font-weight: 300; }
+      .contact-card h2 {
+        margin-bottom: 0.75rem;
+      }
+      .contact-card p {
+        color: var(--text2);
+        max-width: 480px;
+        margin: 0 auto 2.5rem;
+        font-weight: 300;
+      }
 
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
 
-    /* FOOTER */
-    footer {
-      padding: 2rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      position: relative;
-      z-index: 1;
-    }
-    footer p {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--text3);
-    }
-    footer span { color: var(--accent); }
+      /* FOOTER */
+      footer {
+        padding: 2rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+        position: relative;
+        z-index: 1;
+      }
+      footer p {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--text3);
+      }
+      footer span {
+        color: var(--accent);
+      }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .nav-links { display: none; }
-      .hero-stats { gap: 2rem; }
-    }
-  </style>
-</head>
-<body>
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero-stats {
+          gap: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
+    <!-- NAV -->
+    <nav>
+      <a href="#hero" class="nav-logo">alwin<span>.</span>dev</a>
+      <ul class="nav-links">
+        <li><a href="#about">about</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#roadmap">roadmap</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#hero" class="nav-logo">alwin<span>.</span>dev</a>
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#roadmap">roadmap</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
-  </nav>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-inner">
+        <div class="hero-tag">Available for opportunities</div>
+        <h1>
+          Alwin<br />
+          Santhosh<br />
+          <span class="highlight">S.</span>
+        </h1>
+        <p class="hero-desc">
+          SDET with <strong>10+ years</strong> of automation expertise,
+          transitioning into <strong>MERN Full Stack Development</strong>.
+          Building web apps, mobile apps, browser extensions & AI-powered
+          products.
+        </p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn-primary">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+            View Projects
+          </a>
+          <a href="mailto:sanwin24@gmail.com" class="btn-outline">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,12 2,6" />
+            </svg>
+            Get in Touch
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">10<span>+</span></div>
+            <div class="stat-label">Years in QA</div>
+          </div>
+          <div>
+            <div class="stat-num">54<span>+</span></div>
+            <div class="stat-label">GitHub Repos</div>
+          </div>
+          <div>
+            <div class="stat-num">5<span>+</span></div>
+            <div class="stat-label">Live Projects</div>
+          </div>
+          <div>
+            <div class="stat-num">1</div>
+            <div class="stat-label">Flagship AI App 🚀</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-inner">
-      <div class="hero-tag">Available for opportunities</div>
-      <h1>
-        Alwin<br>
-        Santhosh<br>
-        <span class="highlight">S.</span>
-      </h1>
-      <p class="hero-desc">
-        SDET with <strong>10+ years</strong> of automation expertise, transitioning into
-        <strong>MERN Full Stack Development</strong>. Building web apps, mobile apps,
-        browser extensions & AI-powered products.
+    <div class="section-divider"></div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label">// 01 — about</div>
+      <h2>Who I Am</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a
+            <strong>Software Development Engineer in Test (SDET)</strong> with
+            over a decade of experience building automation frameworks from
+            scratch using Selenium, Playwright, Cypress, and TestNG.
+          </p>
+          <p>
+            Currently on an exciting journey into
+            <strong>MERN Full Stack Development</strong> — combining my deep
+            testing instincts with full stack skills to build reliable,
+            production-quality applications.
+          </p>
+          <p>
+            My goal is to build an
+            <strong>AI-powered Personal Finance App</strong> using the full MERN
+            stack, Next.js, React Native (mobile), WXT browser extension, and
+            Claude AI — all from scratch.
+          </p>
+          <ul class="info-list">
+            <li><span class="key">Name</span> Alwin Santhosh S</li>
+            <li><span class="key">Role</span> SDET → MERN FSD</li>
+            <li><span class="key">Email</span> sanwin24@gmail.com</li>
+            <li><span class="key">Course</span> GUVI FSD — MERN</li>
+            <li><span class="key">Location</span> India</li>
+          </ul>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <div class="skill-group-title">⚛ Frontend</div>
+            <div class="skill-tags">
+              <span class="tag">React</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">🔧 Backend</div>
+            <div class="skill-tags">
+              <span class="tag">Node.js</span>
+              <span class="tag">Express.js</span>
+              <span class="tag">REST APIs</span>
+              <span class="tag">JWT Auth</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">🗄 Database</div>
+            <div class="skill-tags">
+              <span class="tag">MongoDB</span>
+              <span class="tag">Mongoose</span>
+              <span class="tag">MySQL</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">📱 Mobile & Extensions</div>
+            <div class="skill-tags">
+              <span class="tag">React Native</span>
+              <span class="tag">Expo</span>
+              <span class="tag">WXT Framework</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">🧪 Automation & Testing</div>
+            <div class="skill-tags">
+              <span class="tag">Playwright</span>
+              <span class="tag">Selenium</span>
+              <span class="tag">Cypress</span>
+              <span class="tag">TestNG</span>
+              <span class="tag">Jest</span>
+              <span class="tag">Postman</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">⚙ DevOps & Tools</div>
+            <div class="skill-tags">
+              <span class="tag">Git</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Jenkins</span>
+              <span class="tag">Linux</span>
+              <span class="tag">GitHub Actions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-label">// 02 — projects</div>
+      <h2>What I've Built</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <span class="project-badge badge-ai">🚧 In Progress</span>
+          <div class="project-title">AI Personal Finance App</div>
+          <div class="project-desc">
+            Full-stack AI-powered finance tracker with smart expense
+            categorization, natural language chat assistant, receipt scanning,
+            and monthly financial health reports.
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">MERN</span>
+            <span class="stack-tag">Next.js</span>
+            <span class="stack-tag">React Native</span>
+            <span class="stack-tag">WXT</span>
+            <span class="stack-tag">Claude AI</span>
+            <span class="stack-tag">TypeScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/AutomationBlog" target="_blank">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              GitHub
+            </a>
+            <span
+              style="
+                color: var(--text3);
+                font-family: var(--mono);
+                font-size: 0.72rem;
+              "
+              >Coming Soon</span
+            >
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge badge-fsd">FSD</span>
+          <div class="project-title">Gas Booking App</div>
+          <div class="project-desc">
+            Capstone MERN project covering a complete gas booking system with
+            user authentication, booking management, and integrated payment
+            gateway.
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">MongoDB</span>
+            <span class="stack-tag">Express</span>
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Node.js</span>
+            <span class="stack-tag">JWT</span>
+          </div>
+          <div class="project-links">
+            <a
+              href="https://github.com/AutomationBlog/gas-booking-fe"
+              target="_blank"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              GitHub
+            </a>
+            <a href="https://gas-booking-app.netlify.app/" target="_blank">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge badge-fsd">FSD</span>
+          <div class="project-title">Auth System</div>
+          <div class="project-desc">
+            End-to-end authentication with JWT, protected routes, forgot
+            password, OTP-based email verification, and password reset flow.
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Node.js</span>
+            <span class="stack-tag">JWT</span>
+            <span class="stack-tag">Nodemailer</span>
+            <span class="stack-tag">MongoDB</span>
+          </div>
+          <div class="project-links">
+            <a
+              href="https://github.com/AutomationBlog/password-reset-frontend"
+              target="_blank"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              GitHub
+            </a>
+            <a href="https://password-reset-blog.netlify.app/" target="_blank">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge badge-fsd">FSD</span>
+          <div class="project-title">Notes / Blog App</div>
+          <div class="project-desc">
+            Notes application with create, edit, delete, pin/unpin, and
+            full-text search. Clean MERN implementation with responsive UI.
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Node.js</span>
+            <span class="stack-tag">MongoDB</span>
+            <span class="stack-tag">Express</span>
+          </div>
+          <div class="project-links">
+            <a
+              href="https://github.com/AutomationBlog/note_app_frontend"
+              target="_blank"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              GitHub
+            </a>
+            <a href="https://notes-app-blog.netlify.app/" target="_blank">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge badge-fsd">FSD</span>
+          <div class="project-title">Invoice App</div>
+          <div class="project-desc">
+            Generate, manage, and download invoices as PDF. Includes email
+            notifications and full invoice lifecycle management.
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Node.js</span>
+            <span class="stack-tag">PDF</span>
+            <span class="stack-tag">Nodemailer</span>
+            <span class="stack-tag">MongoDB</span>
+          </div>
+          <div class="project-links">
+            <a
+              href="https://github.com/AutomationBlog/invoice_frontend"
+              target="_blank"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              GitHub
+            </a>
+            <a href="https://invoice-blog.netlify.app/" target="_blank">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"
+                />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge badge-qa">QA</span>
+          <div class="project-title">Playwright E2E Framework</div>
+          <div class="project-desc">
+            Production-ready E2E automation framework built from scratch with
+            Playwright, Cucumber BDD, and TypeScript. Includes CI/CD integration
+            and reporting.
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">Playwright</span>
+            <span class="stack-tag">TypeScript</span>
+            <span class="stack-tag">Cucumber</span>
+            <span class="stack-tag">BDD</span>
+            <span class="stack-tag">CI/CD</span>
+          </div>
+          <div class="project-links">
+            <a
+              href="https://github.com/AutomationBlog/Playwright_Automation_Framework"
+              target="_blank"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <div class="section-label">// 03 — roadmap</div>
+      <h2>2026–2027 Goals</h2>
+      <div class="roadmap-grid">
+        <div class="roadmap-card done">
+          <div class="roadmap-icon">⚡</div>
+          <div class="roadmap-title">JavaScript ES6+</div>
+          <div class="roadmap-desc">
+            Closures, event loop, async/await, Promises, destructuring, modules.
+          </div>
+          <span class="roadmap-status status-done">✓ Complete</span>
+        </div>
+
+        <div class="roadmap-card done">
+          <div class="roadmap-icon">⚛️</div>
+          <div class="roadmap-title">React</div>
+          <div class="roadmap-desc">
+            Hooks, Context API, React Router, React Query, React Hook Form.
+          </div>
+          <span class="roadmap-status status-done">✓ Complete</span>
+        </div>
+
+        <div class="roadmap-card done">
+          <div class="roadmap-icon">🔧</div>
+          <div class="roadmap-title">Node.js + Express</div>
+          <div class="roadmap-desc">
+            REST APIs, middleware, JWT auth, file uploads, error handling.
+          </div>
+          <span class="roadmap-status status-done">✓ Complete</span>
+        </div>
+
+        <div class="roadmap-card done">
+          <div class="roadmap-icon">🍃</div>
+          <div class="roadmap-title">MongoDB</div>
+          <div class="roadmap-desc">
+            Mongoose ODM, aggregation pipeline, Atlas cloud, indexing.
+          </div>
+          <span class="roadmap-status status-done">✓ Complete</span>
+        </div>
+
+        <div class="roadmap-card active">
+          <div class="roadmap-icon">🔷</div>
+          <div class="roadmap-title">TypeScript</div>
+          <div class="roadmap-desc">
+            Types, interfaces, generics, utility types, TS with React & Node.
+          </div>
+          <span class="roadmap-status status-active">⚡ In Progress</span>
+        </div>
+
+        <div class="roadmap-card active">
+          <div class="roadmap-icon">▲</div>
+          <div class="roadmap-title">Next.js</div>
+          <div class="roadmap-desc">
+            App Router, SSR, SSG, ISR, API routes, NextAuth, Vercel deploy.
+          </div>
+          <span class="roadmap-status status-active">⚡ In Progress</span>
+        </div>
+
+        <div class="roadmap-card">
+          <div class="roadmap-icon">📱</div>
+          <div class="roadmap-title">React Native</div>
+          <div class="roadmap-desc">
+            Expo, navigation, device APIs, AsyncStorage, mobile deployment.
+          </div>
+          <span class="roadmap-status status-soon">📅 Planned</span>
+        </div>
+
+        <div class="roadmap-card">
+          <div class="roadmap-icon">🧩</div>
+          <div class="roadmap-title">WXT Extensions</div>
+          <div class="roadmap-desc">
+            Browser extensions with React + TypeScript, content scripts,
+            Manifest V3.
+          </div>
+          <span class="roadmap-status status-soon">📅 Planned</span>
+        </div>
+
+        <div class="roadmap-card">
+          <div class="roadmap-icon">💰</div>
+          <div class="roadmap-title">AI Finance App</div>
+          <div class="roadmap-desc">
+            Flagship project — MERN + Next.js + React Native + WXT + Claude AI.
+          </div>
+          <span class="roadmap-status status-soon">🚀 Building Soon</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-card">
+        <div class="section-label">// 04 — contact</div>
+        <h2>Let's Build Together</h2>
+        <p>
+          Open to full stack development roles, collaborations, and freelance
+          projects. Let's connect!
+        </p>
+        <div class="contact-links">
+          <a href="mailto:sanwin24@gmail.com" class="btn-primary">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,12 2,6" />
+            </svg>
+            sanwin24@gmail.com
+          </a>
+          <a
+            href="https://github.com/AutomationBlog"
+            target="_blank"
+            class="btn-outline"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+              />
+            </svg>
+            GitHub
+          </a>
+          <a
+            href="https://www.cvwizard.com/d/1eu7KHWKnUTUq2sclvxhzv/view"
+            target="_blank"
+            class="btn-outline"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            Resume
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Designed & Built by <span>Alwin Santhosh S</span> · SDET → MERN FSD ·
+        2026
       </p>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-          View Projects
-        </a>
-        <a href="mailto:sanwin24@gmail.com" class="btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-          Get in Touch
-        </a>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num">10<span>+</span></div>
-          <div class="stat-label">Years in QA</div>
-        </div>
-        <div>
-          <div class="stat-num">54<span>+</span></div>
-          <div class="stat-label">GitHub Repos</div>
-        </div>
-        <div>
-          <div class="stat-num">5<span>+</span></div>
-          <div class="stat-label">Live Projects</div>
-        </div>
-        <div>
-          <div class="stat-num">1</div>
-          <div class="stat-label">Flagship AI App 🚀</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-label">// 01 — about</div>
-    <h2>Who I Am</h2>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>
-          I'm a <strong>Software Development Engineer in Test (SDET)</strong> with over a decade of experience
-          building automation frameworks from scratch using Selenium, Playwright, Cypress, and TestNG.
-        </p>
-        <p>
-          Currently on an exciting journey into <strong>MERN Full Stack Development</strong> — combining my
-          deep testing instincts with full stack skills to build reliable, production-quality applications.
-        </p>
-        <p>
-          My goal is to build an <strong>AI-powered Personal Finance App</strong> using the full MERN stack,
-          Next.js, React Native (mobile), WXT browser extension, and Claude AI — all from scratch.
-        </p>
-        <ul class="info-list">
-          <li><span class="key">Name</span> Alwin Santhosh S</li>
-          <li><span class="key">Role</span> SDET → MERN FSD</li>
-          <li><span class="key">Email</span> sanwin24@gmail.com</li>
-          <li><span class="key">Course</span> GUVI FSD — MERN</li>
-          <li><span class="key">Location</span> India</li>
-        </ul>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <div class="skill-group-title">⚛ Frontend</div>
-          <div class="skill-tags">
-            <span class="tag">React</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">HTML5</span>
-            <span class="tag">CSS3</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">🔧 Backend</div>
-          <div class="skill-tags">
-            <span class="tag">Node.js</span>
-            <span class="tag">Express.js</span>
-            <span class="tag">REST APIs</span>
-            <span class="tag">JWT Auth</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">🗄 Database</div>
-          <div class="skill-tags">
-            <span class="tag">MongoDB</span>
-            <span class="tag">Mongoose</span>
-            <span class="tag">MySQL</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">📱 Mobile & Extensions</div>
-          <div class="skill-tags">
-            <span class="tag">React Native</span>
-            <span class="tag">Expo</span>
-            <span class="tag">WXT Framework</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">🧪 Automation & Testing</div>
-          <div class="skill-tags">
-            <span class="tag">Playwright</span>
-            <span class="tag">Selenium</span>
-            <span class="tag">Cypress</span>
-            <span class="tag">TestNG</span>
-            <span class="tag">Jest</span>
-            <span class="tag">Postman</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">⚙ DevOps & Tools</div>
-          <div class="skill-tags">
-            <span class="tag">Git</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Jenkins</span>
-            <span class="tag">Linux</span>
-            <span class="tag">GitHub Actions</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-label">// 02 — projects</div>
-    <h2>What I've Built</h2>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <span class="project-badge badge-ai">🚧 In Progress</span>
-        <div class="project-title">AI Personal Finance App</div>
-        <div class="project-desc">
-          Full-stack AI-powered finance tracker with smart expense categorization, natural language chat assistant, receipt scanning, and monthly financial health reports.
-        </div>
-        <div class="project-stack">
-          <span class="stack-tag">MERN</span>
-          <span class="stack-tag">Next.js</span>
-          <span class="stack-tag">React Native</span>
-          <span class="stack-tag">WXT</span>
-          <span class="stack-tag">Claude AI</span>
-          <span class="stack-tag">TypeScript</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/AutomationBlog" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <span style="color: var(--text3); font-family: var(--mono); font-size: 0.72rem;">Coming Soon</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge badge-fsd">FSD</span>
-        <div class="project-title">Gas Booking App</div>
-        <div class="project-desc">
-          Capstone MERN project covering a complete gas booking system with user authentication, booking management, and integrated payment gateway.
-        </div>
-        <div class="project-stack">
-          <span class="stack-tag">MongoDB</span>
-          <span class="stack-tag">Express</span>
-          <span class="stack-tag">React</span>
-          <span class="stack-tag">Node.js</span>
-          <span class="stack-tag">JWT</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/AutomationBlog/gas-booking-fe" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://gas-booking-app.netlify.app/" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge badge-fsd">FSD</span>
-        <div class="project-title">Auth System</div>
-        <div class="project-desc">
-          End-to-end authentication with JWT, protected routes, forgot password, OTP-based email verification, and password reset flow.
-        </div>
-        <div class="project-stack">
-          <span class="stack-tag">React</span>
-          <span class="stack-tag">Node.js</span>
-          <span class="stack-tag">JWT</span>
-          <span class="stack-tag">Nodemailer</span>
-          <span class="stack-tag">MongoDB</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/AutomationBlog/password-reset-frontend" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://password-reset-blog.netlify.app/" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge badge-fsd">FSD</span>
-        <div class="project-title">Notes / Blog App</div>
-        <div class="project-desc">
-          Notes application with create, edit, delete, pin/unpin, and full-text search. Clean MERN implementation with responsive UI.
-        </div>
-        <div class="project-stack">
-          <span class="stack-tag">React</span>
-          <span class="stack-tag">Node.js</span>
-          <span class="stack-tag">MongoDB</span>
-          <span class="stack-tag">Express</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/AutomationBlog/note_app_frontend" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://notes-app-blog.netlify.app/" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge badge-fsd">FSD</span>
-        <div class="project-title">Invoice App</div>
-        <div class="project-desc">
-          Generate, manage, and download invoices as PDF. Includes email notifications and full invoice lifecycle management.
-        </div>
-        <div class="project-stack">
-          <span class="stack-tag">React</span>
-          <span class="stack-tag">Node.js</span>
-          <span class="stack-tag">PDF</span>
-          <span class="stack-tag">Nodemailer</span>
-          <span class="stack-tag">MongoDB</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/AutomationBlog/invoice_frontend" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://invoice-blog.netlify.app/" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
-          </a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge badge-qa">QA</span>
-        <div class="project-title">Playwright E2E Framework</div>
-        <div class="project-desc">
-          Production-ready E2E automation framework built from scratch with Playwright, Cucumber BDD, and TypeScript. Includes CI/CD integration and reporting.
-        </div>
-        <div class="project-stack">
-          <span class="stack-tag">Playwright</span>
-          <span class="stack-tag">TypeScript</span>
-          <span class="stack-tag">Cucumber</span>
-          <span class="stack-tag">BDD</span>
-          <span class="stack-tag">CI/CD</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/AutomationBlog/Playwright_Automation_Framework" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- ROADMAP -->
-  <section id="roadmap">
-    <div class="section-label">// 03 — roadmap</div>
-    <h2>2025–2026 Goals</h2>
-    <div class="roadmap-grid">
-
-      <div class="roadmap-card done">
-        <div class="roadmap-icon">⚡</div>
-        <div class="roadmap-title">JavaScript ES6+</div>
-        <div class="roadmap-desc">Closures, event loop, async/await, Promises, destructuring, modules.</div>
-        <span class="roadmap-status status-done">✓ Complete</span>
-      </div>
-
-      <div class="roadmap-card done">
-        <div class="roadmap-icon">⚛️</div>
-        <div class="roadmap-title">React</div>
-        <div class="roadmap-desc">Hooks, Context API, React Router, React Query, React Hook Form.</div>
-        <span class="roadmap-status status-done">✓ Complete</span>
-      </div>
-
-      <div class="roadmap-card done">
-        <div class="roadmap-icon">🔧</div>
-        <div class="roadmap-title">Node.js + Express</div>
-        <div class="roadmap-desc">REST APIs, middleware, JWT auth, file uploads, error handling.</div>
-        <span class="roadmap-status status-done">✓ Complete</span>
-      </div>
-
-      <div class="roadmap-card done">
-        <div class="roadmap-icon">🍃</div>
-        <div class="roadmap-title">MongoDB</div>
-        <div class="roadmap-desc">Mongoose ODM, aggregation pipeline, Atlas cloud, indexing.</div>
-        <span class="roadmap-status status-done">✓ Complete</span>
-      </div>
-
-      <div class="roadmap-card active">
-        <div class="roadmap-icon">🔷</div>
-        <div class="roadmap-title">TypeScript</div>
-        <div class="roadmap-desc">Types, interfaces, generics, utility types, TS with React & Node.</div>
-        <span class="roadmap-status status-active">⚡ In Progress</span>
-      </div>
-
-      <div class="roadmap-card active">
-        <div class="roadmap-icon">▲</div>
-        <div class="roadmap-title">Next.js</div>
-        <div class="roadmap-desc">App Router, SSR, SSG, ISR, API routes, NextAuth, Vercel deploy.</div>
-        <span class="roadmap-status status-active">⚡ In Progress</span>
-      </div>
-
-      <div class="roadmap-card">
-        <div class="roadmap-icon">📱</div>
-        <div class="roadmap-title">React Native</div>
-        <div class="roadmap-desc">Expo, navigation, device APIs, AsyncStorage, mobile deployment.</div>
-        <span class="roadmap-status status-soon">📅 Planned</span>
-      </div>
-
-      <div class="roadmap-card">
-        <div class="roadmap-icon">🧩</div>
-        <div class="roadmap-title">WXT Extensions</div>
-        <div class="roadmap-desc">Browser extensions with React + TypeScript, content scripts, Manifest V3.</div>
-        <span class="roadmap-status status-soon">📅 Planned</span>
-      </div>
-
-      <div class="roadmap-card">
-        <div class="roadmap-icon">💰</div>
-        <div class="roadmap-title">AI Finance App</div>
-        <div class="roadmap-desc">Flagship project — MERN + Next.js + React Native + WXT + Claude AI.</div>
-        <span class="roadmap-status status-soon">🚀 Building Soon</span>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-card">
-      <div class="section-label">// 04 — contact</div>
-      <h2>Let's Build Together</h2>
-      <p>Open to full stack development roles, collaborations, and freelance projects. Let's connect!</p>
-      <div class="contact-links">
-        <a href="mailto:sanwin24@gmail.com" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-          sanwin24@gmail.com
-        </a>
-        <a href="https://github.com/AutomationBlog" target="_blank" class="btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="https://www.cvwizard.com/d/1eu7KHWKnUTUq2sclvxhzv/view" target="_blank" class="btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Resume
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>Designed & Built by <span>Alwin Santhosh S</span> · SDET → MERN FSD · 2026</p>
-  </footer>
-
-</body>
+    </footer>
+  </body>
 </html>
