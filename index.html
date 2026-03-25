@@ -1,1169 +1,993 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alwin Santhosh S — MERN Full Stack Developer & SDET</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0f0f1a;
+      --bg3: #13131f;
+      --surface: #1a1a2e;
+      --border: rgba(99, 102, 241, 0.15);
+      --accent: #6366f1;
+      --accent2: #a78bfa;
+      --accent3: #34d399;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #64748b;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+      --display: 'Syne', sans-serif;
+    }
 
-    <title>Portfolio - Alwin Santhosh S</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    html { scroll-behavior: smooth; }
 
-    <!-- Vendor CSS Files -->
-    <link
-      href="assets/vendor/bootstrap/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link
-      href="assets/vendor/glightbox/css/glightbox.min.css"
-      rel="stylesheet"
-    />
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
 
-    <!-- =======================================================
-  * Template Name: DevFolio - v4.9.1
-  * Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-  </head>
+    /* GLOW ORBS */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.12;
+    }
+    .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; right: -200px; }
+    .orb-2 { width: 400px; height: 400px; background: var(--accent3); bottom: 10%; left: -100px; }
 
-  <body>
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-      <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="logo"><a href="index.html">Alwin Santhosh S</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
-            <li>
-              <a
-                class="nav-link scrollto"
-                href="./assets/resume/version1/Alwin_SDET.html"
-                target="_blank"
-                >Resume</a
-              >
-            </li>
-            <!-- <li><a class="nav-link scrollto " href="#work">Work</a></li> -->
-            <li><a class="nav-link scrollto" href="#blog">Project</a></li>
-            <!-- <li class="dropdown">
-              <a href="#"
-                ><span>Drop Down</span> <i class="bi bi-chevron-down"></i
-              ></a>
-              <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-            </li> -->
-            <!-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> -->
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <!-- .navbar -->
+    .nav-logo {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text2);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: 0.05em;
+    }
+    .nav-links a:hover { color: var(--accent2); }
+
+    /* SECTIONS */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 7rem 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-inner {
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent3);
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      letter-spacing: 0.08em;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent3);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    h1 .highlight {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text2);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.85rem 1.75rem;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text);
+      padding: 0.85rem 1.75rem;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.4s ease both;
+      flex-wrap: wrap;
+    }
+    .stat-num {
+      font-family: var(--display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.04em;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* DIVIDER */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 auto;
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text2);
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .info-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+    .info-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--text2);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-list li:last-child { border-bottom: none; }
+    .info-list .key { color: var(--accent2); min-width: 80px; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .skill-group:hover { border-color: var(--accent); }
+
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text2);
+      background: rgba(99, 102, 241, 0.07);
+      border: 1px solid rgba(99, 102, 241, 0.15);
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .tag:hover {
+      color: var(--accent2);
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.12);
+    }
+
+    /* PROJECTS */
+    #projects {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99,102,241,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.12);
+    }
+
+    .project-badge {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+    }
+    .badge-fsd { background: rgba(99,102,241,0.12); color: var(--accent2); border: 1px solid rgba(99,102,241,0.2); }
+    .badge-qa { background: rgba(52,211,153,0.1); color: var(--accent3); border: 1px solid rgba(52,211,153,0.2); }
+    .badge-ai { background: rgba(251,191,36,0.1); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+    .badge-wip { background: rgba(251,113,133,0.1); color: #fb7185; border: 1px solid rgba(251,113,133,0.2); }
+
+    .project-title {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text2);
+      line-height: 1.65;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .stack-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text3);
+      background: var(--bg3);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .project-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text2);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color 0.2s;
+    }
+    .project-links a:hover { color: var(--accent2); }
+
+    /* ROADMAP */
+    #roadmap {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .roadmap-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.2s;
+    }
+    .roadmap-card:hover { border-color: rgba(99,102,241,0.4); }
+    .roadmap-card.done { border-color: rgba(52,211,153,0.25); }
+    .roadmap-card.active {
+      border-color: rgba(99,102,241,0.5);
+      background: linear-gradient(135deg, rgba(99,102,241,0.05), var(--bg2));
+    }
+
+    .roadmap-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .roadmap-title {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .roadmap-desc {
+      font-size: 0.82rem;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .roadmap-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      margin-top: 1rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+    .status-done { background: rgba(52,211,153,0.1); color: var(--accent3); }
+    .status-active { background: rgba(99,102,241,0.12); color: var(--accent2); }
+    .status-soon { background: rgba(100,116,139,0.15); color: var(--text3); }
+
+    /* CONTACT */
+    #contact {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 200px;
+      background: radial-gradient(ellipse, rgba(99,102,241,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-card h2 { margin-bottom: 0.75rem; }
+    .contact-card p { color: var(--text2); max-width: 480px; margin: 0 auto 2.5rem; font-weight: 300; }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text3);
+    }
+    footer span { color: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">alwin<span>.</span>dev</a>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#roadmap">roadmap</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Available for opportunities</div>
+      <h1>
+        Alwin<br>
+        Santhosh<br>
+        <span class="highlight">S.</span>
+      </h1>
+      <p class="hero-desc">
+        SDET with <strong>10+ years</strong> of automation expertise, transitioning into
+        <strong>MERN Full Stack Development</strong>. Building web apps, mobile apps,
+        browser extensions & AI-powered products.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          View Projects
+        </a>
+        <a href="mailto:sanwin24@gmail.com" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Get in Touch
+        </a>
       </div>
-    </header>
-    <!-- End Header -->
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">10<span>+</span></div>
+          <div class="stat-label">Years in QA</div>
+        </div>
+        <div>
+          <div class="stat-num">54<span>+</span></div>
+          <div class="stat-label">GitHub Repos</div>
+        </div>
+        <div>
+          <div class="stat-num">5<span>+</span></div>
+          <div class="stat-label">Live Projects</div>
+        </div>
+        <div>
+          <div class="stat-num">1</div>
+          <div class="stat-label">Flagship AI App 🚀</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- ======= Hero Section ======= -->
-    <div
-      id="hero"
-      class="hero route bg-image"
-      style="background-image: url(assets/img/hero_bg_laptop.png)"
-    >
-      <div class="overlay-itro"></div>
-      <div class="hero-content display-table">
-        <div class="table-cell">
-          <div class="container">
-            <!--<p class="display-6 color-d">Hello, world!</p>-->
-            <h1 class="hero-title mb-4">I am Alwin Santhosh S</h1>
-            <p class="hero-subtitle">
-              <span
-                class="typed"
-                data-typed-items="MERN - FSD, SDET, Quality Assurance, Automation Testing"
-              ></span>
-            </p>
-            <!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> -->
+  <div class="section-divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">// 01 — about</div>
+    <h2>Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Software Development Engineer in Test (SDET)</strong> with over a decade of experience
+          building automation frameworks from scratch using Selenium, Playwright, Cypress, and TestNG.
+        </p>
+        <p>
+          Currently on an exciting journey into <strong>MERN Full Stack Development</strong> — combining my
+          deep testing instincts with full stack skills to build reliable, production-quality applications.
+        </p>
+        <p>
+          My goal is to build an <strong>AI-powered Personal Finance App</strong> using the full MERN stack,
+          Next.js, React Native (mobile), WXT browser extension, and Claude AI — all from scratch.
+        </p>
+        <ul class="info-list">
+          <li><span class="key">Name</span> Alwin Santhosh S</li>
+          <li><span class="key">Role</span> SDET → MERN FSD</li>
+          <li><span class="key">Email</span> sanwin24@gmail.com</li>
+          <li><span class="key">Course</span> GUVI FSD — MERN</li>
+          <li><span class="key">Location</span> India</li>
+        </ul>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">⚛ Frontend</div>
+          <div class="skill-tags">
+            <span class="tag">React</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">🔧 Backend</div>
+          <div class="skill-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">Express.js</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">JWT Auth</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">🗄 Database</div>
+          <div class="skill-tags">
+            <span class="tag">MongoDB</span>
+            <span class="tag">Mongoose</span>
+            <span class="tag">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">📱 Mobile & Extensions</div>
+          <div class="skill-tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Expo</span>
+            <span class="tag">WXT Framework</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">🧪 Automation & Testing</div>
+          <div class="skill-tags">
+            <span class="tag">Playwright</span>
+            <span class="tag">Selenium</span>
+            <span class="tag">Cypress</span>
+            <span class="tag">TestNG</span>
+            <span class="tag">Jest</span>
+            <span class="tag">Postman</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">⚙ DevOps & Tools</div>
+          <div class="skill-tags">
+            <span class="tag">Git</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Jenkins</span>
+            <span class="tag">Linux</span>
+            <span class="tag">GitHub Actions</span>
           </div>
         </div>
       </div>
     </div>
-    <!-- End Hero Section -->
+  </section>
 
-    <main id="main">
-      <!-- ======= About Section ======= -->
-      <section id="about" class="about-mf sect-pt4 route">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="box-shadow-full">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col-sm-6 col-md-5">
-                        <div class="about-img">
-                          <img
-                            src="assets/img/men-profile-icon.png"
-                            class="img-fluid rounded b-shadow-a"
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                      <div class="col-sm-6 col-md-7">
-                        <div class="about-info">
-                          <p>
-                            <span class="title-s">Name: </span>
-                            <span>Alwin Santhosh S</span>
-                          </p>
-                          <p>
-                            <span class="title-s">Profile: </span>
-                            <span>SDET</span>
-                          </p>
-                          <p>
-                            <span class="title-s">Email: </span>
-                            <span>sanwin24@gmail.com</span>
-                          </p>
-                          <p>
-                            <span class="title-s">Phone: </span>
-                            <span>+91 - 9043365282</span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="skill-mf">
-                      <p class="title-s">Skill</p>
-                      <span>Nightwatch.JS</span>
-                      <span class="pull-right">85%</span>
-                      <div class="progress">
-                        <div
-                          class="progress-bar"
-                          role="progressbar"
-                          style="width: 85%"
-                          aria-valuenow="85"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <span>Node JS & JavaScript</span>
-                      <span class="pull-right">80%</span>
-                      <div class="progress">
-                        <div
-                          class="progress-bar"
-                          role="progressbar"
-                          style="width: 80%"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <span>HTML & CSS</span>
-                      <span class="pull-right">80%</span>
-                      <div class="progress">
-                        <div
-                          class="progress-bar"
-                          role="progressbar"
-                          style="width: 80%"
-                          aria-valuenow="80"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <span>React JS & Express JS</span>
-                      <span class="pull-right">70%</span>
-                      <div class="progress">
-                        <div
-                          class="progress-bar"
-                          role="progressbar"
-                          style="width: 70%"
-                          aria-valuenow="70"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                      <span>Mongo DB</span>
-                      <span class="pull-right">60%</span>
-                      <div class="progress">
-                        <div
-                          class="progress-bar"
-                          role="progressbar"
-                          style="width: 60%"
-                          aria-valuenow="60"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="about-me pt-4 pt-md-0">
-                      <div class="title-box-2">
-                        <h5 class="title-left">About me</h5>
-                      </div>
-                      <p class="lead">
-                        Over 10 years of progressive working experience as a
-                        Software Quality Assurance Engineer, Software Test
-                        Engineer.
-                      </p>
-                      <p class="lead">
-                        Automated software Quality Assurance Testing of client-
-                        server, web-based applications, DB and API testing.
-                        Complete understanding of QA methodologies. Ability to
-                        build automation framework from scratch. Using Selenium,
-                        Cucumber, Nightwatch.JS and other automation tools.
-                      </p>
-                      <p class="lead">
-                        I have completed MERN - Full Stack Development course.
-                        Looking for opportunities in Full Stack Development .
-                      </p>
-                    </div>
-                    <div>
-                      <a
-                        href="assets/resume/version1/Alwin_SDET.html"
-                        type="application/pdf"
-                        target="_blank"
-                        ><button
-                          class="button button-a button-big button-rouded"
-                        >
-                          Download Resume
-                        </button></a
-                      >
-                      <br />
-                      <span>
-                        <a
-                          style="text-decoration: none; color: #ecf0f1"
-                          href="https://www.cvwizard.com/d/4CSAYrpQ9FXrMSOMZRI9T7/view"
-                          target="_blank"
-                          >&copy;cvwizard</a
-                        >
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="section-divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">// 02 — projects</div>
+    <h2>What I've Built</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <span class="project-badge badge-ai">🚧 In Progress</span>
+        <div class="project-title">AI Personal Finance App</div>
+        <div class="project-desc">
+          Full-stack AI-powered finance tracker with smart expense categorization, natural language chat assistant, receipt scanning, and monthly financial health reports.
         </div>
-      </section>
-      <!-- End About Section -->
-
-      <!-- ======= Services Section ======= -->
-      <section id="services" class="services-mf pt-5 route hidden">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="title-box text-center">
-                <h3 class="title-a">Services</h3>
-                <p class="subtitle-a">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                </p>
-                <div class="line-mf"></div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="service-box">
-                <div class="service-ico">
-                  <span class="ico-circle"
-                    ><i class="bi bi-briefcase"></i
-                  ></span>
-                </div>
-                <div class="service-content">
-                  <h2 class="s-title">Web Design</h2>
-                  <p class="s-description text-center">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magni adipisci eaque autem fugiat! Quia, provident vitae!
-                    Magni tempora perferendis eum non provident.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="service-box">
-                <div class="service-ico">
-                  <span class="ico-circle"
-                    ><i class="bi bi-card-checklist"></i
-                  ></span>
-                </div>
-                <div class="service-content">
-                  <h2 class="s-title">Web Development</h2>
-                  <p class="s-description text-center">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magni adipisci eaque autem fugiat! Quia, provident vitae!
-                    Magni tempora perferendis eum non provident.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="service-box">
-                <div class="service-ico">
-                  <span class="ico-circle"
-                    ><i class="bi bi-bar-chart"></i
-                  ></span>
-                </div>
-                <div class="service-content">
-                  <h2 class="s-title">Photography</h2>
-                  <p class="s-description text-center">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magni adipisci eaque autem fugiat! Quia, provident vitae!
-                    Magni tempora perferendis eum non provident.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="service-box">
-                <div class="service-ico">
-                  <span class="ico-circle"
-                    ><i class="bi bi-binoculars"></i
-                  ></span>
-                </div>
-                <div class="service-content">
-                  <h2 class="s-title">Responsive Design</h2>
-                  <p class="s-description text-center">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magni adipisci eaque autem fugiat! Quia, provident vitae!
-                    Magni tempora perferendis eum non provident.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="service-box">
-                <div class="service-ico">
-                  <span class="ico-circle"
-                    ><i class="bi bi-brightness-high"></i
-                  ></span>
-                </div>
-                <div class="service-content">
-                  <h2 class="s-title">Graphic Design</h2>
-                  <p class="s-description text-center">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magni adipisci eaque autem fugiat! Quia, provident vitae!
-                    Magni tempora perferendis eum non provident.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="service-box">
-                <div class="service-ico">
-                  <span class="ico-circle"
-                    ><i class="bi bi-calendar4-week"></i
-                  ></span>
-                </div>
-                <div class="service-content">
-                  <h2 class="s-title">Marketing Services</h2>
-                  <p class="s-description text-center">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magni adipisci eaque autem fugiat! Quia, provident vitae!
-                    Magni tempora perferendis eum non provident.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="project-stack">
+          <span class="stack-tag">MERN</span>
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">React Native</span>
+          <span class="stack-tag">WXT</span>
+          <span class="stack-tag">Claude AI</span>
+          <span class="stack-tag">TypeScript</span>
         </div>
-      </section>
-      <!-- End Services Section -->
-
-      <!-- ======= Counter Section ======= -->
-      <div
-        class="section-counter paralax-mf bg-image hidden"
-        style="background-image: url(assets/img/counters-bg.jpg)"
-      >
-        <div class="overlay-mf"></div>
-        <div class="container position-relative">
-          <div class="row">
-            <div class="col-sm-3 col-lg-3">
-              <div class="counter-box counter-box pt-4 pt-md-0">
-                <div class="counter-ico">
-                  <span class="ico-circle"><i class="bi bi-check"></i></span>
-                </div>
-                <div class="counter-num">
-                  <p
-                    data-purecounter-start="0"
-                    data-purecounter-end="450"
-                    data-purecounter-duration="1"
-                    class="counter purecounter"
-                  ></p>
-                  <span class="counter-text">WORKS COMPLETED</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3 col-lg-3">
-              <div class="counter-box pt-4 pt-md-0">
-                <div class="counter-ico">
-                  <span class="ico-circle"
-                    ><i class="bi bi-journal-richtext"></i
-                  ></span>
-                </div>
-                <div class="counter-num">
-                  <p
-                    data-purecounter-start="0"
-                    data-purecounter-end="25"
-                    data-purecounter-duration="1"
-                    class="counter purecounter"
-                  ></p>
-                  <span class="counter-text">YEARS OF EXPERIENCE</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3 col-lg-3">
-              <div class="counter-box pt-4 pt-md-0">
-                <div class="counter-ico">
-                  <span class="ico-circle"><i class="bi bi-people"></i></span>
-                </div>
-                <div class="counter-num">
-                  <p
-                    data-purecounter-start="0"
-                    data-purecounter-end="550"
-                    data-purecounter-duration="1"
-                    class="counter purecounter"
-                  ></p>
-                  <span class="counter-text">TOTAL CLIENTS</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3 col-lg-3">
-              <div class="counter-box pt-4 pt-md-0">
-                <div class="counter-ico">
-                  <span class="ico-circle"><i class="bi bi-award"></i></span>
-                </div>
-                <div class="counter-num">
-                  <p
-                    data-purecounter-start="0"
-                    data-purecounter-end="48"
-                    data-purecounter-duration="1"
-                    class="counter purecounter"
-                  ></p>
-                  <span class="counter-text">AWARD WON</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="project-links">
+          <a href="https://github.com/AutomationBlog" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <span style="color: var(--text3); font-family: var(--mono); font-size: 0.72rem;">Coming Soon</span>
         </div>
       </div>
-      <!-- End Counter Section -->
 
-      <!-- ======= Portfolio Section ======= -->
-      <section id="work" class="portfolio-mf sect-pt4 route hidden">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="title-box text-center">
-                <h3 class="title-a">Portfolio</h3>
-                <p class="subtitle-a">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                </p>
-                <div class="line-mf"></div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="work-box">
-                <a
-                  href="assets/img/work-1.jpg"
-                  data-gallery="portfolioGallery"
-                  class="portfolio-lightbox"
-                >
-                  <div class="work-img">
-                    <img src="assets/img/work-1.jpg" alt="" class="img-fluid" />
-                  </div>
-                </a>
-                <div class="work-content">
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <h2 class="w-title">Lorem impsum dolor</h2>
-                      <div class="w-more">
-                        <span class="w-ctegory">Web Design</span> /
-                        <span class="w-date">18 Sep. 2018</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="w-like">
-                        <a href="portfolio-details.html">
-                          <span class="bi bi-plus-circle"></span
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="work-box">
-                <a
-                  href="assets/img/work-2.jpg"
-                  data-gallery="portfolioGallery"
-                  class="portfolio-lightbox"
-                >
-                  <div class="work-img">
-                    <img src="assets/img/work-2.jpg" alt="" class="img-fluid" />
-                  </div>
-                </a>
-                <div class="work-content">
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <h2 class="w-title">Loreda Cuno Nere</h2>
-                      <div class="w-more">
-                        <span class="w-ctegory">Web Design</span> /
-                        <span class="w-date">18 Sep. 2018</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="w-like">
-                        <a href="portfolio-details.html">
-                          <span class="bi bi-plus-circle"></span
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="work-box">
-                <a
-                  href="assets/img/work-3.jpg"
-                  data-gallery="portfolioGallery"
-                  class="portfolio-lightbox"
-                >
-                  <div class="work-img">
-                    <img src="assets/img/work-3.jpg" alt="" class="img-fluid" />
-                  </div>
-                </a>
-                <div class="work-content">
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <h2 class="w-title">Mavrito Lana Dere</h2>
-                      <div class="w-more">
-                        <span class="w-ctegory">Web Design</span> /
-                        <span class="w-date">18 Sep. 2018</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="w-like">
-                        <a href="portfolio-details.html">
-                          <span class="bi bi-plus-circle"></span
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="work-box">
-                <a
-                  href="assets/img/work-4.jpg"
-                  data-gallery="portfolioGallery"
-                  class="portfolio-lightbox"
-                >
-                  <div class="work-img">
-                    <img src="assets/img/work-4.jpg" alt="" class="img-fluid" />
-                  </div>
-                </a>
-                <div class="work-content">
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <h2 class="w-title">Bindo Laro Cado</h2>
-                      <div class="w-more">
-                        <span class="w-ctegory">Web Design</span> /
-                        <span class="w-date">18 Sep. 2018</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="w-like">
-                        <a href="portfolio-details.html">
-                          <span class="bi bi-plus-circle"></span
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="work-box">
-                <a
-                  href="assets/img/work-5.jpg"
-                  data-gallery="portfolioGallery"
-                  class="portfolio-lightbox"
-                >
-                  <div class="work-img">
-                    <img src="assets/img/work-5.jpg" alt="" class="img-fluid" />
-                  </div>
-                </a>
-                <div class="work-content">
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <h2 class="w-title">Studio Lena Mado</h2>
-                      <div class="w-more">
-                        <span class="w-ctegory">Web Design</span> /
-                        <span class="w-date">18 Sep. 2018</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="w-like">
-                        <a href="portfolio-details.html">
-                          <span class="bi bi-plus-circle"></span
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="work-box">
-                <a
-                  href="assets/img/work-6.jpg"
-                  data-gallery="portfolioGallery"
-                  class="portfolio-lightbox"
-                >
-                  <div class="work-img">
-                    <img src="assets/img/work-6.jpg" alt="" class="img-fluid" />
-                  </div>
-                </a>
-                <div class="work-content">
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <h2 class="w-title">Studio Big Bang</h2>
-                      <div class="w-more">
-                        <span class="w-ctegory">Web Design</span> /
-                        <span class="w-date">18 Sep. 2017</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="w-like">
-                        <a href="portfolio-details.html">
-                          <span class="bi bi-plus-circle"></span
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="project-card">
+        <span class="project-badge badge-fsd">FSD</span>
+        <div class="project-title">Gas Booking App</div>
+        <div class="project-desc">
+          Capstone MERN project covering a complete gas booking system with user authentication, booking management, and integrated payment gateway.
         </div>
-      </section>
-      <!-- End Portfolio Section -->
-
-      <!-- ======= Testimonials Section ======= -->
-      <div
-        class="testimonials paralax-mf bg-image hidden"
-        style="background-image: url(assets/img/overlay-bg.jpg)"
-      >
-        <div class="overlay-mf"></div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div
-                class="testimonials-slider swiper"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="testimonial-box">
-                      <div class="author-test">
-                        <img
-                          src="assets/img/men-profile-icon.png"
-                          alt=""
-                          class="rounded-circle b-shadow-a"
-                        />
-                        <span class="author">Xavi Alonso</span>
-                      </div>
-                      <div class="content-test">
-                        <p class="description lead">
-                          Curabitur arcu erat, accumsan id imperdiet et,
-                          porttitor at sem. Lorem ipsum dolor sit amet,
-                          consectetur adipiscing elit.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End testimonial item -->
-
-                  <div class="swiper-slide">
-                    <div class="testimonial-box">
-                      <div class="author-test">
-                        <img
-                          src="assets/img/testimonial-4.jpg"
-                          alt=""
-                          class="rounded-circle b-shadow-a"
-                        />
-                        <span class="author">Marta Socrate</span>
-                      </div>
-                      <div class="content-test">
-                        <p class="description lead">
-                          Curabitur arcu erat, accumsan id imperdiet et,
-                          porttitor at sem. Lorem ipsum dolor sit amet,
-                          consectetur adipiscing elit.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End testimonial item -->
-                </div>
-                <div class="swiper-pagination"></div>
-              </div>
-
-              <!-- <div id="testimonial-mf" class="owl-carousel owl-theme">
-          
-        </div> -->
-            </div>
-          </div>
+        <div class="project-stack">
+          <span class="stack-tag">MongoDB</span>
+          <span class="stack-tag">Express</span>
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">JWT</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AutomationBlog/gas-booking-fe" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://gas-booking-app.netlify.app/" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
         </div>
       </div>
-      <!-- End Testimonials Section -->
 
-      <!-- ======= Blog Section ======= -->
-      <section id="blog" class="blog-mf sect-pt4 route">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="title-box text-center">
-                <h3 class="title-a">Projects</h3>
-                <p class="subtitle-a">
-                  Check my projects and my work experience in MERN - Full Stack
-                  Development
-                </p>
-                <div class="line-mf"></div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card card-blog">
-                <div class="card-img">
-                  <img
-                    src="assets/img/software-development.webp"
-                    alt=""
-                    class="img-fluid"
-                  />
-                </div>
-                <div class="card-body">
-                  <div class="card-category-box">
-                    <div class="card-category">
-                      <h6 class="category">FSD</h6>
-                    </div>
-                  </div>
-                  <h3 class="card-title">Gas Booking</h3>
-                  <p class="card-description">
-                    Final cap stone project in MERN - Full Stack Development
-                    course. it covers all the features of a gas booking system.
-                    And, user authentication, and payment gateway.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <div
-                    class="post-author"
-                    style="display: flex; justify-content: space-between"
-                  >
-                    <a
-                      href="https://github.com/AutomationBlog/gas-booking-fe"
-                      target="_blank"
-                    >
-                      <span class="author">Github</span>
-                    </a>
-                    <a
-                      href="https://gas-booking-app.netlify.app/"
-                      target="_blank"
-                    >
-                      <span class="author">Live Demo</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-blog">
-                <div class="card-img">
-                  <img
-                    src="assets/img/authentication.jpeg"
-                    alt=""
-                    class="img-fluid"
-                  />
-                </div>
-                <div class="card-body">
-                  <div class="card-category-box">
-                    <div class="card-category">
-                      <h6 class="category">FSD</h6>
-                    </div>
-                  </div>
-                  <h3 class="card-title">Authentication</h3>
-                  <p class="card-description">
-                    E2E authentication and authorization using JWT. Produected
-                    routes are - Login, Register, Forgot Password. And, Forgot
-                    Password and Reset Password with OTP Email Notification.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <div
-                    class="post-author"
-                    style="display: flex; justify-content: space-between"
-                  >
-                    <a
-                      href="https://github.com/AutomationBlog/password-reset-frontend"
-                      target="_blank"
-                    >
-                      <span class="author">Github</span>
-                    </a>
-                    <a
-                      href="https://password-reset-blog.netlify.app/"
-                      target="_blank"
-                    >
-                      <span class="author">Live Demo</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-blog">
-                <div class="card-img">
-                  <img src="assets/img/journal.jpg" alt="" class="img-fluid" />
-                </div>
-                <div class="card-body">
-                  <div class="card-category-box">
-                    <div class="card-category">
-                      <h6 class="category">FSD</h6>
-                    </div>
-                  </div>
-                  <h3 class="card-title">Blog APP</h3>
-                  <p class="card-description">
-                    Notes application create, edit and delete notes. Pin and
-                    unpin notes. and search notes.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <div
-                    class="post-author"
-                    style="display: flex; justify-content: space-between"
-                  >
-                    <a
-                      href="https://github.com/AutomationBlog/note_app_frontend"
-                      target="_blank"
-                    >
-                      <span class="author">Github</span>
-                    </a>
-                    <a
-                      href="https://notes-app-blog.netlify.app/"
-                      target="_blank"
-                    >
-                      <span class="author">Live Demo</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-blog">
-                <div class="card-img">
-                  <img src="assets/img/invoice.png" alt="" class="img-fluid" />
-                </div>
-                <div class="card-body">
-                  <div class="card-category-box">
-                    <div class="card-category">
-                      <h6 class="category">FSD</h6>
-                    </div>
-                  </div>
-                  <h3 class="card-title">Invoice App</h3>
-                  <p class="card-description">
-                    Generate invoice and download the invoice in PDF format.
-                    Manage invoice. And, Email Notification.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <div
-                    class="post-author"
-                    style="display: flex; justify-content: space-between"
-                  >
-                    <a
-                      href="https://github.com/AutomationBlog/invoice_frontend"
-                      target="_blank"
-                    >
-                      <span class="author">Github</span>
-                    </a>
-                    <a href="https://invoice-blog.netlify.app/" target="_blank">
-                      <span class="author">Live Demo</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-blog">
-                <div class="card-img">
-                  <img
-                    src="assets/img/E2E_farmwork.webp"
-                    alt=""
-                    class="img-fluid"
-                  />
-                </div>
-                <div class="card-body">
-                  <div class="card-category-box">
-                    <div class="card-category">
-                      <h6 class="category">QA</h6>
-                    </div>
-                  </div>
-                  <h3 class="card-title">Automation Framework</h3>
-                  <p class="card-description">
-                    Created E2E Automation framework using Playwright, Cucumber
-                    and TypeScript from scratch.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <div
-                    class="post-author"
-                    style="display: flex; justify-content: space-between"
-                  >
-                    <a
-                      href="https://github.com/AutomationBlog/Playwright_Automation_Framework?tab=readme-ov-file#playwright-automation-framework"
-                      target="_blank"
-                    >
-                      <span class="author">Github</span>
-                    </a>
-                    <!-- <a href="https://invoice-blog.netlify.app/" target="_blank">
-                      <span class="author">Live Demo</span>
-                    </a> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="project-card">
+        <span class="project-badge badge-fsd">FSD</span>
+        <div class="project-title">Auth System</div>
+        <div class="project-desc">
+          End-to-end authentication with JWT, protected routes, forgot password, OTP-based email verification, and password reset flow.
         </div>
-      </section>
-      <!-- End Blog Section -->
-
-      <!-- ======= Contact Section ======= -->
-      <section
-        id="contact_section"
-        class="paralax-mf footer-paralax bg-image sect-mt4 route hidden"
-        style="background-image: url(assets/img/overlay-bg.jpg)"
-      >
-        <div class="overlay-mf"></div>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="contact-mf">
-                <div id="contact" class="box-shadow-full">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="title-box-2">
-                        <h5 class="title-left">Send Message Us</h5>
-                      </div>
-                      <div>
-                        <form
-                          action="forms/contact.php"
-                          method="post"
-                          role="form"
-                          class="php-email-form"
-                        >
-                          <div class="row">
-                            <div class="col-md-12 mb-3">
-                              <div class="form-group">
-                                <input
-                                  type="text"
-                                  name="name"
-                                  class="form-control"
-                                  id="name"
-                                  placeholder="Your Name"
-                                  required
-                                />
-                              </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                              <div class="form-group">
-                                <input
-                                  type="email"
-                                  class="form-control"
-                                  name="email"
-                                  id="email"
-                                  placeholder="Your Email"
-                                  required
-                                />
-                              </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                              <div class="form-group">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="subject"
-                                  id="subject"
-                                  placeholder="Subject"
-                                  required
-                                />
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <textarea
-                                  class="form-control"
-                                  name="message"
-                                  rows="5"
-                                  placeholder="Message"
-                                  required
-                                ></textarea>
-                              </div>
-                            </div>
-                            <div class="col-md-12 text-center my-3">
-                              <div class="loading">Loading</div>
-                              <div class="error-message"></div>
-                              <div class="sent-message">
-                                Your message has been sent. Thank you!
-                              </div>
-                            </div>
-                            <div class="col-md-12 text-center">
-                              <button
-                                type="submit"
-                                class="button button-a button-big button-rouded"
-                              >
-                                Send Message
-                              </button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="title-box-2 pt-4 pt-md-0">
-                        <h5 class="title-left">Get in Touch</h5>
-                      </div>
-                      <div class="more-info">
-                        <p class="lead">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Facilis dolorum dolorem soluta quidem expedita
-                          aperiam aliquid at. Totam magni ipsum suscipit amet?
-                          Autem nemo esse laboriosam ratione nobis mollitia
-                          inventore?
-                        </p>
-                        <ul class="list-ico">
-                          <li>
-                            <span class="bi bi-geo-alt"></span> 329 WASHINGTON
-                            ST BOSTON, MA 02108
-                          </li>
-                          <li>
-                            <span class="bi bi-phone"></span> (617) 557-0089
-                          </li>
-                          <li>
-                            <span class="bi bi-envelope"></span>
-                            contact@example.com
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="socials">
-                        <ul>
-                          <li>
-                            <a href=""
-                              ><span class="ico-circle"
-                                ><i class="bi bi-facebook"></i></span
-                            ></a>
-                          </li>
-                          <li>
-                            <a href=""
-                              ><span class="ico-circle"
-                                ><i class="bi bi-instagram"></i></span
-                            ></a>
-                          </li>
-                          <li>
-                            <a href=""
-                              ><span class="ico-circle"
-                                ><i class="bi bi-twitter"></i></span
-                            ></a>
-                          </li>
-                          <li>
-                            <a href=""
-                              ><span class="ico-circle"
-                                ><i class="bi bi-linkedin"></i></span
-                            ></a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="project-stack">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">JWT</span>
+          <span class="stack-tag">Nodemailer</span>
+          <span class="stack-tag">MongoDB</span>
         </div>
-      </section>
-      <!-- End Contact Section -->
-    </main>
-    <!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="copyright-box">
-              <p class="copyright">
-                &copy; Copyright <strong>DevFolio</strong>. All Rights Reserved
-              </p>
-              <div class="credits">
-                <!--
-              All the links in the footer should remain intact.
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=DevFolio
-            -->
-                Designed by
-                <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div>
-            </div>
-          </div>
+        <div class="project-links">
+          <a href="https://github.com/AutomationBlog/password-reset-frontend" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://password-reset-blog.netlify.app/" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
         </div>
       </div>
-    </footer>
-    <!-- End  Footer -->
 
-    <div id="preloader"></div>
-    <a
-      href="#"
-      class="back-to-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
+      <div class="project-card">
+        <span class="project-badge badge-fsd">FSD</span>
+        <div class="project-title">Notes / Blog App</div>
+        <div class="project-desc">
+          Notes application with create, edit, delete, pin/unpin, and full-text search. Clean MERN implementation with responsive UI.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">MongoDB</span>
+          <span class="stack-tag">Express</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AutomationBlog/note_app_frontend" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://notes-app-blog.netlify.app/" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
+        </div>
+      </div>
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/typed.js/typed.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+      <div class="project-card">
+        <span class="project-badge badge-fsd">FSD</span>
+        <div class="project-title">Invoice App</div>
+        <div class="project-desc">
+          Generate, manage, and download invoices as PDF. Includes email notifications and full invoice lifecycle management.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">PDF</span>
+          <span class="stack-tag">Nodemailer</span>
+          <span class="stack-tag">MongoDB</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AutomationBlog/invoice_frontend" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://invoice-blog.netlify.app/" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
+        </div>
+      </div>
 
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
-  </body>
+      <div class="project-card">
+        <span class="project-badge badge-qa">QA</span>
+        <div class="project-title">Playwright E2E Framework</div>
+        <div class="project-desc">
+          Production-ready E2E automation framework built from scratch with Playwright, Cucumber BDD, and TypeScript. Includes CI/CD integration and reporting.
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Playwright</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Cucumber</span>
+          <span class="stack-tag">BDD</span>
+          <span class="stack-tag">CI/CD</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AutomationBlog/Playwright_Automation_Framework" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="section-label">// 03 — roadmap</div>
+    <h2>2025–2026 Goals</h2>
+    <div class="roadmap-grid">
+
+      <div class="roadmap-card done">
+        <div class="roadmap-icon">⚡</div>
+        <div class="roadmap-title">JavaScript ES6+</div>
+        <div class="roadmap-desc">Closures, event loop, async/await, Promises, destructuring, modules.</div>
+        <span class="roadmap-status status-done">✓ Complete</span>
+      </div>
+
+      <div class="roadmap-card done">
+        <div class="roadmap-icon">⚛️</div>
+        <div class="roadmap-title">React</div>
+        <div class="roadmap-desc">Hooks, Context API, React Router, React Query, React Hook Form.</div>
+        <span class="roadmap-status status-done">✓ Complete</span>
+      </div>
+
+      <div class="roadmap-card done">
+        <div class="roadmap-icon">🔧</div>
+        <div class="roadmap-title">Node.js + Express</div>
+        <div class="roadmap-desc">REST APIs, middleware, JWT auth, file uploads, error handling.</div>
+        <span class="roadmap-status status-done">✓ Complete</span>
+      </div>
+
+      <div class="roadmap-card done">
+        <div class="roadmap-icon">🍃</div>
+        <div class="roadmap-title">MongoDB</div>
+        <div class="roadmap-desc">Mongoose ODM, aggregation pipeline, Atlas cloud, indexing.</div>
+        <span class="roadmap-status status-done">✓ Complete</span>
+      </div>
+
+      <div class="roadmap-card active">
+        <div class="roadmap-icon">🔷</div>
+        <div class="roadmap-title">TypeScript</div>
+        <div class="roadmap-desc">Types, interfaces, generics, utility types, TS with React & Node.</div>
+        <span class="roadmap-status status-active">⚡ In Progress</span>
+      </div>
+
+      <div class="roadmap-card active">
+        <div class="roadmap-icon">▲</div>
+        <div class="roadmap-title">Next.js</div>
+        <div class="roadmap-desc">App Router, SSR, SSG, ISR, API routes, NextAuth, Vercel deploy.</div>
+        <span class="roadmap-status status-active">⚡ In Progress</span>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-icon">📱</div>
+        <div class="roadmap-title">React Native</div>
+        <div class="roadmap-desc">Expo, navigation, device APIs, AsyncStorage, mobile deployment.</div>
+        <span class="roadmap-status status-soon">📅 Planned</span>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-icon">🧩</div>
+        <div class="roadmap-title">WXT Extensions</div>
+        <div class="roadmap-desc">Browser extensions with React + TypeScript, content scripts, Manifest V3.</div>
+        <span class="roadmap-status status-soon">📅 Planned</span>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-icon">💰</div>
+        <div class="roadmap-title">AI Finance App</div>
+        <div class="roadmap-desc">Flagship project — MERN + Next.js + React Native + WXT + Claude AI.</div>
+        <span class="roadmap-status status-soon">🚀 Building Soon</span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-card">
+      <div class="section-label">// 04 — contact</div>
+      <h2>Let's Build Together</h2>
+      <p>Open to full stack development roles, collaborations, and freelance projects. Let's connect!</p>
+      <div class="contact-links">
+        <a href="mailto:sanwin24@gmail.com" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          sanwin24@gmail.com
+        </a>
+        <a href="https://github.com/AutomationBlog" target="_blank" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.cvwizard.com/d/1eu7KHWKnUTUq2sclvxhzv/view" target="_blank" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Resume
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Designed & Built by <span>Alwin Santhosh S</span> · SDET → MERN FSD · 2026</p>
+  </footer>
+
+</body>
 </html>
